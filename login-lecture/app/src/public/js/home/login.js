@@ -1,16 +1,22 @@
 "use strict";
 
-const { login } = require("../../../home/home.ctrl");
-
 const id = document.querySelector("#id"),
  psword = document.querySelector("#psword"),
  loginBtn = document.querySelector("button");
+
 loginBtn.addEventListener("click", login);
 
 function login() {
     const req = {
-        id: id.ariaValueMax,
-        psword: psword.ariaValueMax,
+        id: id.value,
+        psword: psword.value,
     };
-    console.log(req);
+
+    fetch("/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(req),
+    }).then((res) => res.json())
 }
